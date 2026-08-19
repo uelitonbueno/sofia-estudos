@@ -18,3 +18,8 @@
 - [x] Validar a navegação e a abertura do formulário de nova disciplina em telas móveis.
 - [x] Cobrir o caminho dos atalhos para nova disciplina com teste automatizado de navegação e abertura do formulário.
 - [x] Adicionar testes de interface para os atalhos do painel e a abertura automática do formulário de disciplina.
+- [x] Transcrever vídeos enviados sem legenda extraindo o áudio e processando-o pelo Whisper.
+- [x] Exibir limites de formato e duração para transcrição de vídeo no fluxo de materiais.
+- [x] Cobrir o pipeline de vídeo sem legenda com testes automatizados.
+- [x] Orientar o aluno a enviar o MP4 quando um link do YouTube não possuir legendas públicas para extração direta.
+- [x] Validar por teste integrado que o vídeo enviado percorre extração de áudio, armazenamento temporário e Whisper.

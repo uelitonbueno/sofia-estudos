@@ -1,6 +1,7 @@
 import { invokeLLM } from "./_core/llm";
 import { transcribeAudio } from "./_core/voiceTranscription";
-import { storageGetSignedUrl } from "./storage";
+import { storageGetSignedUrl, storagePut } from "./storage";
+import { extractVideoAudio } from "./videoTranscription";
 
 const FAST_MODEL = "gpt-5-mini";
 const MULTIMODAL_MODEL = "gemini-3-flash-preview";
@@ -73,13 +74,12 @@ export async function extractYoutubeTranscript(youtubeUrl: string) {
     const transcript = lines.filter(Boolean).join(" ").trim();
     if (transcript.length > 80) return { transcript, title, videoId };
   }
-  throw new Error("Este vídeo não possui legendas públicas disponíveis. Adicione o vídeo com uma transcrição ou use outro material.");
+  throw new Error("Este link não possui legendas públicas disponíveis. Para transcrever a fala mesmo sem legenda, baixe o vídeo que você tem direito de usar e envie o arquivo MP4 na opção Arquivo.");
 }
 
-export async function extractFileContent(input: { storageKey: string; mimeType?: string | null; type: "pdf" | "image" | "video" }) {
+export async function extractFileContent(input: { storageKey: string; mimeType?: string | null; type: "pdf" | "image" }) {
   const url = await storageGetSignedUrl(input.storageKey);
   const isImage = input.type === "image";
-  const fileMimeType = input.type === "video" ? "video/mp4" : "application/pdf";
   const response = await invokeLLM({
     model: MULTIMODAL_MODEL,
     maxTokens: 9000,
@@ -94,7 +94,7 @@ export async function extractFileContent(input: { storageKey: string; mimeType?:
           { type: "text", text: "Extraia o conteúdo de estudo deste material." },
           isImage
             ? { type: "image_url", image_url: { url, detail: "high" } }
-            : { type: "file_url", file_url: { url, mime_type: fileMimeType } },
+            : { type: "file_url", file_url: { url, mime_type: "application/pdf" } },
         ],
       },
     ],
@@ -111,6 +111,17 @@ export async function transcribeStudyAudio(storageKey: string) {
   });
   if (!("text" in response)) throw new Error(response.error || "Não foi possível transcrever o áudio.");
   return cleanExtractedText(response.text || "");
+}
+
+export async function transcribeUploadedVideo(storageKey: string) {
+  const videoUrl = await storageGetSignedUrl(storageKey);
+  const videoResponse = await fetch(videoUrl);
+  if (!videoResponse.ok) throw new Error("Não foi possível acessar o vídeo enviado.");
+  const video = Buffer.from(await videoResponse.arrayBuffer());
+  const { audio, durationSeconds } = await extractVideoAudio(video);
+  const { key: audioKey } = await storagePut(`students/video-audio/${crypto.randomUUID()}.mp3`, audio, "audio/mpeg");
+  const transcription = await transcribeStudyAudio(audioKey);
+  return { transcription, durationSeconds };
 }
 
 export async function generateSummary(text: string, format: "quick" | "complete" | "topics" | "simple") {

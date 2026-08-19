@@ -15,6 +15,7 @@ import {
   gradeQuizAnswers,
   rankRelevantChunks,
   transcribeStudyAudio,
+  transcribeUploadedVideo,
 } from "./ai";
 import * as db from "./db";
 
@@ -68,9 +69,13 @@ async function processMaterialForStudy(userId: number, materialId: number) {
     } else if (material.type === "audio") {
       if (!material.storageKey) throw new Error("O áudio não está disponível.");
       text = await transcribeStudyAudio(material.storageKey);
-    } else if (["pdf", "image", "video"].includes(material.type)) {
+    } else if (material.type === "video") {
+      if (!material.storageKey) throw new Error("O vídeo não está disponível.");
+      const result = await transcribeUploadedVideo(material.storageKey);
+      text = result.transcription;
+    } else if (["pdf", "image"].includes(material.type)) {
       if (!material.storageKey) throw new Error("O arquivo não está disponível.");
-      text = await extractFileContent({ storageKey: material.storageKey, mimeType: material.mimeType, type: material.type as "pdf" | "image" | "video" });
+      text = await extractFileContent({ storageKey: material.storageKey, mimeType: material.mimeType, type: material.type as "pdf" | "image" });
     }
     if (text.trim().length < 25) throw new Error("Não foi possível extrair conteúdo suficiente deste material.");
     const chunks = chunkText(text).map(content => ({ content, keywords: keywordsFromText(content) }));
