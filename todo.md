@@ -23,3 +23,7 @@
 - [x] Cobrir o pipeline de vídeo sem legenda com testes automatizados.
 - [x] Orientar o aluno a enviar o MP4 quando um link do YouTube não possuir legendas públicas para extração direta.
 - [x] Validar por teste integrado que o vídeo enviado percorre extração de áudio, armazenamento temporário e Whisper.
+- [x] Corrigir o fluxo de links do YouTube sem legenda para não prometer extração indisponível.
+- [x] Adicionar um caminho explícito e seguro para transcrever vídeos sem legenda cujo arquivo o aluno tenha direito de utilizar.
+- [x] Validar as mensagens e os atalhos de vídeo do YouTube em celular.
+- [x] Permitir abrir diretamente a fonte YouTube por rota para validação e compartilhamento do fluxo.
