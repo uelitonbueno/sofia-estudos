@@ -1,13 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -27,151 +26,109 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  --radius: 0.75rem;
+  --background: #070711;
+  --foreground: #edf8ff;
+  --card: #101020;
+  --card-foreground: #edf8ff;
+  --popover: #131323;
+  --popover-foreground: #edf8ff;
+  --primary: #22d3ee;
+  --primary-foreground: #061116;
+  --secondary: #22213a;
+  --secondary-foreground: #e7e7ff;
+  --muted: #191829;
+  --muted-foreground: #9291ad;
+  --accent: #292742;
+  --accent-foreground: #f4f3ff;
+  --destructive: #fb7185;
+  --destructive-foreground: #fff1f3;
+  --border: rgba(103, 232, 249, 0.14);
+  --input: rgba(148, 163, 184, 0.12);
+  --ring: #22d3ee;
 }
 
-.dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+* { border-color: var(--border); }
+html { background: var(--background); }
+body {
+  min-width: 320px;
+  background:
+    radial-gradient(900px 500px at 100% 0%, rgba(192, 38, 211, .10), transparent 68%),
+    radial-gradient(760px 480px at 0% 28%, rgba(8, 145, 178, .10), transparent 70%),
+    #070711;
+  color: var(--foreground);
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
 }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+::selection { background: rgba(217, 70, 239, .42); color: white; }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  button:not(:disabled),
-  [role="button"]:not([aria-disabled="true"]),
-  [type="button"]:not(:disabled),
-  [type="submit"]:not(:disabled),
-  [type="reset"]:not(:disabled),
-  a[href],
-  select:not(:disabled),
-  input[type="checkbox"]:not(:disabled),
-  input[type="radio"]:not(:disabled) {
-    @apply cursor-pointer;
-  }
+.sofia-main {
+  min-height: 100vh;
+  background-image:
+    linear-gradient(rgba(34, 211, 238, .026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, .026) 1px, transparent 1px);
+  background-size: 44px 44px;
 }
-
-@layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
-  .container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
-    padding-right: 1rem;
-  }
-
-  .flex {
-    min-height: 0;
-    min-width: 0;
-  }
-
-  @media (min-width: 640px) {
-    .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
-      padding-right: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .container {
-      padding-left: 2rem; /* 32px - desktop padding */
-      padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
-    }
-  }
+.sofia-auth-grid {
+  background-image:
+    linear-gradient(rgba(34, 211, 238, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, .045) 1px, transparent 1px),
+    radial-gradient(580px 400px at 50% 50%, rgba(192, 38, 211, .16), transparent 76%);
+  background-size: 38px 38px, 38px 38px, auto;
 }
+.hud-panel {
+  position: relative;
+  border: 1px solid rgba(103, 232, 249, .22);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(20, 20, 39, .92), rgba(9, 9, 21, .88));
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .32), inset 0 1px 0 rgba(255, 255, 255, .04);
+}
+.hud-panel::before, .hud-panel::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  width: 20px;
+  height: 20px;
+}
+.hud-panel::before { left: -1px; top: -1px; border-left: 2px solid #22d3ee; border-top: 2px solid #22d3ee; border-radius: 18px 0 0 0; }
+.hud-panel::after { right: -1px; bottom: -1px; border-right: 2px solid #e879f9; border-bottom: 2px solid #e879f9; border-radius: 0 0 18px 0; }
+.hud-label { font-family: "DM Mono", monospace; font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #67e8f9; }
+.neon-title { text-shadow: 0 0 24px rgba(34, 211, 238, .22); }
+.sofia-core {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(103,232,249,.55);
+  border-radius: 10px 4px 10px 4px;
+  background: radial-gradient(circle at 34% 30%, rgba(34,211,238,.35), rgba(192,38,211,.18) 50%, rgba(7,7,17,.1) 72%);
+  box-shadow: 0 0 18px rgba(34,211,238,.2), inset 0 0 16px rgba(192,38,211,.16);
+}
+.sofia-core::before, .sofia-core::after { content:""; position:absolute; border-radius:50%; }
+.sofia-core::before { width: 14px; height:14px; border:1px solid #67e8f9; box-shadow: 8px -8px 0 -6px #f0abfc, -8px 8px 0 -6px #67e8f9; }
+.sofia-core::after { width:4px; height:4px; background:#f0abfc; box-shadow: 8px -8px 0 #67e8f9, -8px 8px 0 #f0abfc; }
+.neon-button {
+  color: #fff;
+  background: linear-gradient(100deg, #db2777, #c026d3 48%, #0891b2);
+  box-shadow: 0 0 0 1px rgba(250, 232, 255, .15), 0 10px 28px rgba(192, 38, 211, .26);
+  transition: transform 160ms cubic-bezier(.23,1,.32,1), box-shadow 160ms cubic-bezier(.23,1,.32,1);
+}
+.neon-button:hover { box-shadow: 0 0 24px rgba(217, 70, 239, .38), 0 10px 28px rgba(8, 145, 178, .24); }
+.neon-button:active { transform: scale(.97); }
+.soft-button { border: 1px solid rgba(103,232,249,.18); background: rgba(15,23,42,.65); color: #cffafe; }
+.soft-button:hover { border-color: rgba(103,232,249,.45); background: rgba(34,211,238,.09); }
+.metric-glow { text-shadow: 0 0 18px currentColor; }
+.scan-line { position: relative; overflow: hidden; }
+.scan-line::after { content:""; position:absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(103,232,249,.11), transparent); transform: translateX(-120%); animation: scan 5s ease-in-out infinite; pointer-events:none; }
+@keyframes scan { 0%, 44% { transform:translateX(-120%); } 65%, 100% { transform:translateX(140%); } }
+@media (prefers-reduced-motion: reduce) { .scan-line::after { animation:none; } }
