@@ -23,10 +23,11 @@ export function StatusPill({ children, tone = "cyan" }: { children: ReactNode; t
   return <span className={cn("inline-flex items-center rounded-full border px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[.12em]", colors[tone])}>{children}</span>;
 }
 
-export function EmptyState({ title, description, icon }: { title: string; description: string; icon: ReactNode }) {
+export function EmptyState({ title, description, icon, action }: { title: string; description: string; icon: ReactNode; action?: ReactNode }) {
   return <HudPanel className="flex min-h-56 flex-col items-center justify-center p-7 text-center">
     <div className="mb-4 flex size-12 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-200">{icon}</div>
     <h3 className="text-base font-bold text-slate-100">{title}</h3>
     <p className="mt-2 max-w-sm text-sm leading-6 text-slate-400">{description}</p>
+    {action && <div className="mt-5">{action}</div>}
   </HudPanel>;
 }

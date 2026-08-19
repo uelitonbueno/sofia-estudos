@@ -14,3 +14,7 @@
 - [x] Criar interface cyberpunk responsiva de alto contraste, com elementos HUD, rosa neon e ciano elétrico.
 - [x] Validar a compilação, os testes e a renderização responsiva de todos os fluxos implementados.
 - [x] Cobrir a lógica crítica de RAG, autenticação, repetição espaçada e domínio com testes Vitest, além de validar interfaces no navegador.
+- [x] Corrigir o acionamento de criação de disciplina a partir do estado vazio e dos atalhos do painel, especialmente no celular.
+- [x] Validar a navegação e a abertura do formulário de nova disciplina em telas móveis.
+- [x] Cobrir o caminho dos atalhos para nova disciplina com teste automatizado de navegação e abertura do formulário.
+- [x] Adicionar testes de interface para os atalhos do painel e a abertura automática do formulário de disciplina.
