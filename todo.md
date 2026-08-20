@@ -27,5 +27,5 @@
 - [x] Adicionar um caminho explícito e seguro para transcrever vídeos sem legenda cujo arquivo o aluno tenha direito de utilizar.
 - [x] Validar as mensagens e os atalhos de vídeo do YouTube em celular.
 - [x] Permitir abrir diretamente a fonte YouTube por rota para validação e compartilhamento do fluxo.
-- [ ] Exportar o código-fonte atualizado da SOF-IA para um repositório GitHub do usuário.
-- [ ] Confirmar o link público ou privado do repositório para importação no Manus Web.
+- [x] Exportar o código-fonte atualizado da SOF-IA para um repositório GitHub do usuário.
+- [x] Confirmar o link público ou privado do repositório para importação no Manus Web.
