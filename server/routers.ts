@@ -26,18 +26,19 @@ const subjectInput = z.object({
   icon: z.string().trim().max(48).optional(),
 });
 
-const materialType = z.enum(["pdf", "image", "audio", "video", "youtube", "text"]);
+const materialType = z.enum(["pdf", "docx", "image", "audio", "video", "youtube", "text"]);
 const summaryFormat = z.enum(["quick", "complete", "topics", "simple"]);
 
 function inferMaterialType(mimeType: string, name: string) {
   const normalized = mimeType.toLowerCase();
   const extension = name.split(".").pop()?.toLowerCase();
   if (normalized === "application/pdf" || extension === "pdf") return "pdf" as const;
+  if (normalized === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || extension === "docx") return "docx" as const;
   if (normalized.startsWith("image/")) return "image" as const;
   if (normalized.startsWith("audio/")) return "audio" as const;
   if (normalized === "video/mp4" || extension === "mp4") return "video" as const;
   if (normalized.startsWith("video/")) throw new Error("Para processamento por IA, envie vídeos no formato MP4.");
-  throw new Error("Formato não suportado. Use PDF, imagem, áudio ou vídeo.");
+  throw new Error("Formato não suportado. Use PDF, DOCX, imagem, áudio ou vídeo.");
 }
 
 function decodeDataUrl(dataUrl: string) {
@@ -73,9 +74,9 @@ async function processMaterialForStudy(userId: number, materialId: number) {
       if (!material.storageKey) throw new Error("O vídeo não está disponível.");
       const result = await transcribeUploadedVideo(material.storageKey);
       text = result.transcription;
-    } else if (["pdf", "image"].includes(material.type)) {
+    } else if (["pdf", "docx", "image"].includes(material.type)) {
       if (!material.storageKey) throw new Error("O arquivo não está disponível.");
-      text = await extractFileContent({ storageKey: material.storageKey, mimeType: material.mimeType, type: material.type as "pdf" | "image" });
+      text = await extractFileContent({ storageKey: material.storageKey, mimeType: material.mimeType, type: material.type as "pdf" | "docx" | "image" });
     }
     if (text.trim().length < 25) throw new Error("Não foi possível extrair conteúdo suficiente deste material.");
     const chunks = chunkText(text).map(content => ({ content, keywords: keywordsFromText(content) }));

@@ -1,4 +1,5 @@
 import { invokeLLM } from "./_core/llm";
+import mammoth from "mammoth";
 import { transcribeAudio } from "./_core/voiceTranscription";
 import { storageGetSignedUrl, storagePut } from "./storage";
 import { extractVideoAudio } from "./videoTranscription";
@@ -77,8 +78,15 @@ export async function extractYoutubeTranscript(youtubeUrl: string) {
   throw new Error("Este link não possui legendas públicas disponíveis. Para transcrever a fala mesmo sem legenda, baixe o vídeo que você tem direito de usar e envie o arquivo MP4 na opção Arquivo.");
 }
 
-export async function extractFileContent(input: { storageKey: string; mimeType?: string | null; type: "pdf" | "image" }) {
+export async function extractFileContent(input: { storageKey: string; mimeType?: string | null; type: "pdf" | "docx" | "image" }) {
   const url = await storageGetSignedUrl(input.storageKey);
+  if (input.type === "docx") {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Não foi possível acessar o documento DOCX enviado.");
+    const buffer = Buffer.from(await response.arrayBuffer());
+    const result = await mammoth.extractRawText({ buffer });
+    return cleanExtractedText(result.value);
+  }
   const isImage = input.type === "image";
   const response = await invokeLLM({
     model: MULTIMODAL_MODEL,

@@ -15,6 +15,13 @@
       "when": 1787134792505,
       "tag": "0001_whole_shape",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1787254617655,
+      "tag": "0002_powerful_preak",
+      "breakpoints": true
     }
   ]
 }

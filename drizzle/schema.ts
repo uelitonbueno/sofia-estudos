@@ -54,7 +54,7 @@ export const materials = mysqlTable("materials", {
   userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
   subjectId: int("subjectId").notNull().references(() => subjects.id, { onDelete: "cascade" }),
   title: varchar("title", { length: 240 }).notNull(),
-  type: mysqlEnum("type", ["pdf", "image", "audio", "video", "youtube", "text"]).notNull(),
+  type: mysqlEnum("type", ["pdf", "docx", "image", "audio", "video", "youtube", "text"]).notNull(),
   sourceUrl: varchar("sourceUrl", { length: 2048 }),
   storageKey: varchar("storageKey", { length: 1024 }),
   storageUrl: varchar("storageUrl", { length: 2048 }),

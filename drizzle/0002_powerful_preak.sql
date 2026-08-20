@@ -1,0 +1,1 @@
+ALTER TABLE `materials` MODIFY COLUMN `type` enum('pdf','docx','image','audio','video','youtube','text') NOT NULL;
